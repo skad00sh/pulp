@@ -42,7 +42,7 @@ routes = [(w,b) for w in warehouses for b in bars]
 
 # A dictionary called x is created to contain quantity shipped on the routes
 x = pulp.LpVariable.dicts("route", (warehouses, bars), 
-                        lowBound = 0 
+                        lowBound = 0 ,
                         cat = pulp.LpInteger)
 
 # The objective function is added to 'prob' first
@@ -66,11 +66,11 @@ prob.writeLP("BeerDistributionProblem.lp")
 prob.solve()
 
 # The status of the solution is printed to the screen
-print "Status:", pulp.LpStatus[prob.status]
+print ("Status:", pulp.LpStatus[prob.status])
 
 # Each of the variables is printed with it's resolved optimum value
 for v in prob.variables():
-    print v.name, "=", v.varValue
+    print (v.name, "=", v.varValue)
 
 # The optimised objective function value is printed to the screen    
-print "Total Cost of Transportation = ", prob.objective.value()
+print ("Total Cost of Transportation = ", prob.objective.value())
